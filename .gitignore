@@ -1,0 +1,8 @@
+docker-gs-ping/
+tmp/
+mysql/data/
+images/
+
+memo.txt
+.env
+.DS_Store

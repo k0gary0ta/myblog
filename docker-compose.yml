@@ -1,0 +1,42 @@
+version: "3"
+services:
+    app:
+        container_name: app
+        build: .
+        tty: true
+        ports:
+            - "8080:8080"
+        volumes:
+            - ./app:/go/src/app
+        depends_on:
+            - db
+        networks:
+            - dev_network
+
+    db:
+        container_name: db
+        build: ./mysql/
+        volumes:
+            - type: volume
+              source: dev_volume
+              target: /var/lib/mysql
+            - type: bind
+              source: ./mysql/init
+              target: /docker-entrypoint-initdb.d
+        tty: true
+        ports:
+            - 3306:3306
+        environment:
+            - MYSQL_ROOT_PASSWORD=root
+        env_file:
+            - ./.env
+        networks:
+            - dev_network
+
+volumes:
+  dev_volume:
+    name: dev_volume
+
+networks:
+  dev_network:
+    external: true
