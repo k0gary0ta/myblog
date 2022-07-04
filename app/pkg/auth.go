@@ -68,4 +68,7 @@ var JWTMiddleware = jwtmiddleware.New(jwtmiddleware.Options{
 	},
 })
 
+// type Manager struct {
+// cookieName string
+// }
 // func ValidateCookie() {}
