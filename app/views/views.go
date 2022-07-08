@@ -18,6 +18,7 @@ func TopPageHandler(w http.ResponseWriter, r *http.Request) {
 	expiration := time.Now()
 	expiration = expiration.AddDate(1, 0, 0)
 	cookie := http.Cookie{Name: "username", Value: "astaxie", Expires: expiration}
+	fmt.Println("############", cookie)
 	http.SetCookie(w, &cookie)
 
 	db := pkg.OpenDB()
@@ -34,11 +35,14 @@ func TopPageHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func BlogContentsPageHandler(w http.ResponseWriter, r *http.Request) {
-	cookie, _ := r.Cookie("Name")
+	cookie, _ := r.Cookie("username")
 	fmt.Println("cookie ============>", cookie)
-	// for _, cookie := range r.Cookies() {
-	// 	fmt.Println("cookie ------------->", cookie.Name)
-	// }
+
+	for _, cookie := range r.Cookies() {
+		fmt.Println("cookie ------------->", cookie.Name)
+	}
+
+	fmt.Println("###################", r.Cookies())
 
 	db := pkg.OpenDB()
 	defer db.Close()

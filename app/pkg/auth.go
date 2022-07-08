@@ -68,7 +68,18 @@ var JWTMiddleware = jwtmiddleware.New(jwtmiddleware.Options{
 	},
 })
 
-// type Manager struct {
-// cookieName string
+// type Provider interface {
+// 	SessionInit(sid string) (Session, error)
+// 	SessionRead(sid string) (Session, error)
+// 	SessionDestroy(sid string) error
+// 	SessionGC(maxLifeTime int64)
 // }
+
+// type Manager struct {
+// 	cookieName string
+// 	lock sync.Mutex
+// 	provider Provider
+// 	maxlifetime int64
+// }
+
 // func ValidateCookie() {}
